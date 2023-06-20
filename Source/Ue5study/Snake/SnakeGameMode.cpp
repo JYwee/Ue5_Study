@@ -10,12 +10,32 @@ void ASnakeGameMode::BeginPlay()
 	
 }
 
-void ASnakeGameMode::CreateLineWall(int x, int y, TSubclassOf<AActor> wallActor)
+void ASnakeGameMode::CreateLineWall(int x, int y, FVector tileSize, TSubclassOf<AActor> wallActor)
 {
-	for (int i = 0; i < x+2; i++)
+	mTileCount.X = x;
+	mTileCount.Y = y;
+	mTileSize = tileSize;
+
+
+	for (int i = 0; i < mTileCount.X + 2; i++)
 	{
 		FTransform trans;
+
+		trans.SetLocation({0, mTileSize.X * static_cast<float>(i), 0.0f});
+		AActor* SpawnActor1 = GetWorld()->SpawnActor<AActor>(wallActor, trans);
 		
-		AActor* SpawnActor = GetWorld()->SpawnActor<AActor>(wallActor, trans);
+		trans.SetLocation({ 0, mTileSize.X * static_cast<float>(i), mTileSize.Y * static_cast<float>(mTileCount.Y + 1) });
+		AActor* SpawnActor2 = GetWorld()->SpawnActor<AActor>(wallActor, trans);
+
+	}
+
+	for (int i = 0; i < mTileCount.Y + 2; i++)
+	{
+		FTransform trans;
+		trans.SetLocation({ 0, 0, mTileSize.X * i });
+		AActor* SpawnActor1 = GetWorld()->SpawnActor<AActor>(wallActor, trans);
+		trans.SetLocation({ 0, mTileSize.X * static_cast<float>(mTileCount.X + 1), mTileSize.Y * i });
+		AActor* SpawnedActor2 = GetWorld()->SpawnActor<AActor>(wallActor, trans);
+	
 	}
 }
