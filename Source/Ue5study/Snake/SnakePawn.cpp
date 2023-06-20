@@ -31,7 +31,7 @@ void ASnakePawn::BeginPlay()
 		return;
 	}
 
-	// ´Ù¿îÄ³½ºÆÃ
+	// Â´Ã™Â¿Ã®Ã„Â³Â½ÂºÃ†Ãƒ
 	ASnakeGameMode* SnakeGameMode = Cast<ASnakeGameMode>(GameModePtr);
 
 	if (nullptr == SnakeGameMode && false == SnakeGameMode->IsValidLowLevel())
@@ -40,12 +40,13 @@ void ASnakePawn::BeginPlay()
 		return;
 	}
 
-	FIntVector2 Count = SnakeGameMode->GetTileCount();
+	FIntVector3 Count = SnakeGameMode->GetTileCount();
 	FVector Size = SnakeGameMode->GetTileSize();
-	// /°¡ »çÄ¢¿¬»êÁß °¡Àå ´À¸° ¿¬»êÀÔ´Ï´Ù.
-	// /2 ÇÒ¹Ù¿¡´Â *0.5f
+	// /Â°Â¡ Â»Ã§Ã„Â¢Â¿Â¬Â»ÃªÃÃŸ Â°Â¡Ã€Ã¥ Â´Ã€Â¸Â° Â¿Â¬Â»ÃªÃ€Ã”Â´ÃÂ´Ã™.
+	// /2 Ã‡Ã’Â¹Ã™Â¿Â¡Â´Ã‚ *0.5f
+	
 
-	FVector Center = { -1000.0f, Size.X * Count.X * 0.5f, Size.Y * Count.Y * 0.5f };
+	FVector Center = { -1000.0f, Size.Y * Count.Y * 0.5f, Size.Z * Count.Z * 0.5f };
 
 	SetActorLocation(Center);
 }

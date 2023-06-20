@@ -21,17 +21,17 @@ protected:
 public:
 
 	UFUNCTION(BlueprintCallable)
-	void CreateLineWall(int x, int y, FVector tileSize, TSubclassOf<AActor> wallActor);
+	void CreateLineWall(int y, int z, FVector tileSize, TSubclassOf<AActor> wallActor);
 
 	FORCEINLINE FVector GetTileSize() {
 		return mTileSize;
 	}
 
-	FORCEINLINE FIntVector2 GetTileCount() {
+	FORCEINLINE FIntVector3 GetTileCount() {
 		return mTileCount;
 	}
 
 private:
 	FVector mTileSize;
-	FIntVector2	mTileCount;
+	FIntVector3	mTileCount;
 };
