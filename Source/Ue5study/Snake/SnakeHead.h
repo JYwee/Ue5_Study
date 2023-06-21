@@ -4,10 +4,12 @@
 
 #include "CoreMinimal.h"
 #include "GameFramework/Actor.h"
+#include "SnakeActor.h"
 #include "SnakeHead.generated.h"
 
+
 UCLASS()
-class UE5STUDY_API ASnakeHead : public AActor
+class UE5STUDY_API ASnakeHead : public ASnakeActor
 {
 	GENERATED_BODY()
 	
