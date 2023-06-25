@@ -49,4 +49,25 @@ public:
 	UFUNCTION(BlueprintCallable)
 		void ActionMoveLeft();
 
+	UFUNCTION(BlueprintCallable)
+		void AddBody(ASnakeActor* bodyactor);
+
+	UFUNCTION(BlueprintCallable)
+		void MoveBody(bool isAdd, ASnakeActor* newBody, FVector movePos);
+
+
+	FORCEINLINE	TArray<ASnakeActor*> GetBodyAct() {
+		return mBodyActArr;
+	}
+
+
+private:
+
+	
+
+	UPROPERTY(Category = "SnakeBodyAct", EditAnywhere, Meta = (wallActors))
+		TArray<ASnakeActor*> mBodyActArr /*= { nullptr }*/;
+
+	UPROPERTY(Category = "SnakeModeData", EditAnywhere, DisplayName = "mApple")
+		TSubclassOf<ASnakeActor> mBody;
 };

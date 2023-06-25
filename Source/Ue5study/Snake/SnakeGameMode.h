@@ -17,6 +17,7 @@ class UE5STUDY_API ASnakeGameMode : public AGameMode
 protected:
 	// Called when the game starts or when spawned
 	virtual void BeginPlay() override;
+	virtual void Tick(float deltatime) override;
 
 public:
 
@@ -31,7 +32,45 @@ public:
 		return mTileCount;
 	}
 
+	UFUNCTION(BlueprintCallable)
+		bool IsSamePostion(FVector headPosVec);
+
+	UFUNCTION(BlueprintCallable)
+		void CreateApple();
+
+	UFUNCTION(BlueprintCallable)
+		void RespawnApple();
+
+
+	UFUNCTION(BlueprintCallable)
+		void SetActorArr(AActor* actor, int y, int z);
+
+
+
+	bool bAppleFlag = true;
+
 private:
 	FVector mTileSize;
 	FIntVector3	mTileCount;
+
+	FRandomStream RandomCreate = FRandomStream();
+
+	//UProperty(blueprint)
+	TArray<TArray<class AActor*>> mActorAll;
+
+	UPROPERTY(Category = "SnakeModeData", EditAnywhere, Meta = (wallActors))
+	TArray<AActor*> mWallActArr /*= { nullptr }*/;
+
+	//UPROPERTY(Category = "SnakeModeData", EditAnywhere, Meta = (wallActors))
+	//TArray<AActor*> mBodyActArr /*= { nullptr }*/;
+
+	UPROPERTY(Category = "SnakeModeData", EditAnywhere, DisplayName = "mApple")
+	TSubclassOf<AActor> mApple;
+
+
+	
+
+	AActor* mApplePtr;
+
+
 };
