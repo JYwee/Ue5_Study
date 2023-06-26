@@ -67,10 +67,10 @@ private:
 	UPROPERTY(Category = "SnakeModeData", EditAnywhere, DisplayName = "mApple")
 	TSubclassOf<AActor> mApple;
 
-
+	bool mIsGameEnd = false;
 	
 
-	AActor* mApplePtr;
+	AActor* mApplePtr = nullptr;
 
 
 };

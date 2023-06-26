@@ -2,6 +2,8 @@
 
 
 #include "SnakeGameMode.h"
+#include "Kismet/KismetSystemLibrary.h"
+#include "Kismet/GameplayStatics.h"
 
 void ASnakeGameMode::BeginPlay()
 {
@@ -14,10 +16,14 @@ void ASnakeGameMode::Tick(float deltatime)
 {
 	Super::Tick(deltatime);
 
+	if (mApplePtr == nullptr)
+	{
+		CreateApple();
+	}
 	
-	CreateApple();
-	
-
+	if (mIsGameEnd == true) {
+		UKismetSystemLibrary::QuitGame(GetWorld(), UGameplayStatics::GetPlayerController(GetWorld(), 0), EQuitPreference::Quit, true);
+	}
 }
 
 void ASnakeGameMode::CreateLineWall(int y, int z, FVector tileSize, TSubclassOf<AActor> wallActor)
@@ -96,7 +102,7 @@ bool ASnakeGameMode::IsSamePostion(FVector headPosVec)
 
 		return true;
 	}
-	else {
+	else{
 		for (int i = 0; i < mWallActArr.Num(); i++)
 		{
 			if (headPosVec.Z == mWallActArr[i]->GetActorLocation().Z &&
@@ -105,7 +111,22 @@ bool ASnakeGameMode::IsSamePostion(FVector headPosVec)
 				return true;
 			}
 		}
+		FIntVector intVec = { 0, int(headPosVec.Y / 100.0f), int(headPosVec.Z / 100.0f) };
+
+		if (intVec.Y<0 || intVec.Z<0 || intVec.Y >mTileCount.Y || intVec.Z > mTileCount.Z)
+		{
+			UE_LOG(LogTemp, Error, TEXT("intVec arraycount is worng"));
+			return false;
+		}
+		if (mActorAll[intVec.Z][intVec.Y] != nullptr) {
+			if (mActorAll[intVec.Z][intVec.Y]->ActorHasTag("Body")) {
+				mIsGameEnd = true;
+				return true;
+			}
+		}
+		
 	}
+	
 	return false;
 }
 

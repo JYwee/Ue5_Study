@@ -10,6 +10,7 @@
 
 enum class DIRECTION
 {
+	NONE,
 	RIGHT,
 	LEFT,
 	UP,

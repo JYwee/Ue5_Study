@@ -112,7 +112,7 @@ void ASnakeHead::ActionMoveUp()
 		else
 		{
 			isAddNewbody = true;
-			SnGameMode->RespawnApple();
+			//SnGameMode->RespawnApple();
 		}
 	}
 	mDirection = DIRECTION::UP;
@@ -138,7 +138,7 @@ void ASnakeHead::ActionMoveDown()
 		else
 		{
 			isAddNewbody = true;
-			SnGameMode->RespawnApple();
+			//SnGameMode->RespawnApple();
 		}
 	}
 	mDirection = DIRECTION::DOWN;
@@ -164,7 +164,7 @@ void ASnakeHead::ActionMoveRight()
 		else
 		{
 			isAddNewbody = true;
-			SnGameMode->RespawnApple();
+			//SnGameMode->RespawnApple();
 		}
 	}
 	mDirection = DIRECTION::RIGHT;
@@ -189,7 +189,7 @@ void ASnakeHead::ActionMoveLeft()
 		else
 		{
 			isAddNewbody = true;
-			SnGameMode->RespawnApple();
+			//SnGameMode->RespawnApple();
 		}
 	}
 	mDirection = DIRECTION::LEFT;
@@ -226,7 +226,7 @@ void ASnakeHead::MoveBody(bool isAdd, ASnakeActor* newBody, FVector movePos)
 	{
 		FVector prev = GetActorLocation();
 		AddActorLocalOffset(movePos);
-		//SnGameMode->SetActorArr(this, GetActorLocation().Y / 100.0f, GetActorLocation().Z / 100.0f);
+		SnGameMode->SetActorArr(this, GetActorLocation().Y / 100.0f, GetActorLocation().Z / 100.0f);
 
 		for (int i = 0; i < bodycount; i++)
 		{
@@ -243,12 +243,13 @@ void ASnakeHead::MoveBody(bool isAdd, ASnakeActor* newBody, FVector movePos)
 					newBody = GetWorld()->SpawnActor<ASnakeActor>(mBody, trans);
 					mBodyActArr.Add(newBody);
 				}
+
 				SnGameMode->SetActorArr(newBody, prev.Y / 100.0f, prev.Z / 100.0f);
 			}
-			else
-			{
+//			else
+//			{
 				SnGameMode->SetActorArr(mBodyActArr[i], mBodyActArr[i]->GetActorLocation().Y / SnGameMode->GetTileSize().Y, mBodyActArr[i]->GetActorLocation().Z / SnGameMode->GetTileSize().Z);
-			}
+//			}
 
 			
 			//SnGameMode->SetActorArr(mBodyActArr[i], mBodyActArr[i]->GetActorLocation().Y / 100.0f, mBodyActArr[i]->GetActorLocation().Z / 100.0f);
