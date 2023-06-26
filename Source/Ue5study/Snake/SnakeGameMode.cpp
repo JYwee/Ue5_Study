@@ -155,6 +155,10 @@ void ASnakeGameMode::CreateApple()
 				}
 			}
 
+			if (emptyArr.Num() == 0) {
+				mIsGameEnd = true;
+				return;
+			}
 			int tmp_rand = RandomCreate.RandRange(0, emptyArr.Num() - 1);
 
 			FTransform Trans;
