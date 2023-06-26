@@ -96,6 +96,10 @@ void ASnakeHead::DownMove(float fvalue)
 
 void ASnakeHead::ActionMoveUp()
 {
+	if (mDirection == DIRECTION::DOWN)
+	{
+		return;
+	}
 	FVector movePos = FVector::UpVector * 100.0f;
 	bool isAddNewbody = false;
 	ASnakeActor* newBody = nullptr;
@@ -111,13 +115,17 @@ void ASnakeHead::ActionMoveUp()
 			SnGameMode->RespawnApple();
 		}
 	}
-	
+	mDirection = DIRECTION::UP;
 	MoveBody(isAddNewbody, newBody, movePos);
 
 }
 
 void ASnakeHead::ActionMoveDown()
 {
+	if (mDirection == DIRECTION::UP)
+	{
+		return;
+	}
 	ASnakeGameMode* SnGameMode = GetSnakeGameMode();
 	bool isAddNewbody = false;
 	ASnakeActor* newBody = nullptr;
@@ -133,11 +141,16 @@ void ASnakeHead::ActionMoveDown()
 			SnGameMode->RespawnApple();
 		}
 	}
+	mDirection = DIRECTION::DOWN;
 	MoveBody(isAddNewbody, newBody, movePos);
 }
 
 void ASnakeHead::ActionMoveRight()
 {
+	if (mDirection == DIRECTION::LEFT)
+	{
+		return;
+	}
 	ASnakeGameMode* SnGameMode = GetSnakeGameMode();
 	bool isAddNewbody = false;
 	ASnakeActor* newBody = nullptr;
@@ -154,11 +167,16 @@ void ASnakeHead::ActionMoveRight()
 			SnGameMode->RespawnApple();
 		}
 	}
+	mDirection = DIRECTION::RIGHT;
 	MoveBody(isAddNewbody, newBody, movePos);
 }
 
 void ASnakeHead::ActionMoveLeft()
 {
+	if (mDirection == DIRECTION::RIGHT)
+	{
+		return;
+	}
 	ASnakeGameMode* SnGameMode = GetSnakeGameMode();
 	bool isAddNewbody = false;
 	ASnakeActor* newBody = nullptr;
@@ -174,6 +192,7 @@ void ASnakeHead::ActionMoveLeft()
 			SnGameMode->RespawnApple();
 		}
 	}
+	mDirection = DIRECTION::LEFT;
 	MoveBody(isAddNewbody, newBody, movePos);
 }
 

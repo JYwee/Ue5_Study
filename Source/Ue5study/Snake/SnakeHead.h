@@ -8,6 +8,14 @@
 #include "SnakeHead.generated.h"
 
 
+enum class DIRECTION
+{
+	RIGHT,
+	LEFT,
+	UP,
+	DOWN
+};
+
 UCLASS()
 class UE5STUDY_API ASnakeHead : public ASnakeActor
 {
@@ -63,7 +71,7 @@ public:
 
 private:
 
-	
+	DIRECTION mDirection;
 
 	UPROPERTY(Category = "SnakeBodyAct", EditAnywhere, Meta = (wallActors))
 		TArray<ASnakeActor*> mBodyActArr /*= { nullptr }*/;
