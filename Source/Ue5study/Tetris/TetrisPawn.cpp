@@ -49,7 +49,7 @@ void ATetrisPawn::BeginPlay()
 	mCenter = { -1000.0f, Size.Y * Count.Y * 0.5f, Size.Z * Count.Z * 0.5f };
 
 	SetActorLocation(mCenter);
-	mCenter = { 0.0f , Size.Y * Count.Y * 0.5f, Size.Z * Count.Z * 0.5f };
+	mCenter = { 0.0f , Size.Y * Count.Y * 0.5f, Size.Z * (Count.Z - 1) };
 
 	SpawnTetrisBlock();
 }
